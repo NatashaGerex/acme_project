@@ -2,7 +2,7 @@ from django import forms
 
 from django.core.exceptions import ValidationError
 
-from .models import Birthday
+from .models import Birthday, Congratulation
 
 BEATLES = {'Джон Ленон', 'Пол Маккартни', 'Джордж Харрисон', 'Ринго Старр'}
 
@@ -10,7 +10,7 @@ BEATLES = {'Джон Ленон', 'Пол Маккартни', 'Джордж Х�
 class BirthdayForm(forms.ModelForm):
     class Meta:
         model = Birthday
-        fields = '__all__'
+        exclude = ('author',)
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'})
         }
@@ -35,3 +35,10 @@ class BirthdayForm(forms.ModelForm):
 #         label='Дата рождения',
 #         widget=forms.DateInput(attrs={'type': 'date'})
     # )
+
+
+class CongratulationForm(forms.ModelForm):
+
+    class Meta:
+        model = Congratulation
+        fields = ('text',)
